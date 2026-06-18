@@ -5,7 +5,7 @@ import java.io.File;
 
 public final class SoundPlayer extends Thread {
 
-    public static final String CORRECT_SOUND_PATH = "src/assets/correct_answer.wav";
+    public static final String CORRECT_SOUND_PATH = "/workspaces/CG_Heritage_Java/Day15Porject/src/assets/correct_answer.wav";
 
     public static void playCorrectAnswerSound() {
             try {
