@@ -2,6 +2,7 @@ import java.util.List;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class KbcGame {
+
     private final List<Level> levels = GameData.createLevels();
 
     public void run() {
@@ -13,7 +14,6 @@ public class KbcGame {
 
             for (int levelIndex = 0; levelIndex < levels.size(); levelIndex++) {
                 Level level = levels.get(levelIndex);
-                int levelPoints = 0;
 
                 System.out.println("========================================");
                 System.out.println("LEVEL " + (levelIndex + 1) + ": " + level.getName());
@@ -36,17 +36,16 @@ public class KbcGame {
                     int answer = input.readInt("Your answer (1-" + options.length + "): ", 1, options.length);
 
                     if (answer == question.getCorrectOption()) {
-                        levelPoints += question.getPoints();
+                        securedPoints += question.getPoints();
                         System.out.println("Correct! You earned " + question.getPoints() + " points.");
 
                         SoundPlayer s = new SoundPlayer();
                         s.start();
 
-                        System.out.println("Current level points: " + levelPoints);
+                        System.out.println("Current level points: " + securedPoints);
 
                         boolean continueGame = input.askContinue();
                         if (!continueGame) {
-                            securedPoints += levelPoints;
                             printFinalScore(securedPoints, true);
                             return;
                         }
@@ -58,7 +57,6 @@ public class KbcGame {
                     }
                 }
 
-                securedPoints += levelPoints;
                 System.out.println();
                 System.out.println("Great! You completed Level " + (levelIndex + 1) + ".");
                 System.out.println("Your secured points are now: " + securedPoints);

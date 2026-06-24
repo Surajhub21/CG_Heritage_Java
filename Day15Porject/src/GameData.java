@@ -3,9 +3,7 @@ import java.util.List;
 
 public final class GameData {
 
-    private GameData() {
-
-    }
+    private GameData() {}
 
     public static List<Level> createLevels() {
         List<Level> levels = new ArrayList<>();
