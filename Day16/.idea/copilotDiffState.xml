@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/README.md">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/README.md" />
+              <option name="updatedContent" value="# Day16 Thread Demos&#10;&#10;Compile all demos:&#10;&#10;```powershell&#10;javac src\*.java&#10;```&#10;&#10;Run each demo:&#10;&#10;```powershell&#10;java -cp src MyThreadDemo&#10;java -cp src RunnableDemo&#10;java -cp src LifecycleDemo&#10;java -cp src CounterRaceDemo&#10;java -cp src DeadlockDemo&#10;```&#10;&#10;What each demo shows:&#10;&#10;- `MyThreadDemo`: `extends Thread`, `start()`, `sleep()`&#10;- `RunnableDemo`: `implements Runnable`, named class, lambda, `Thread` constructor&#10;- `LifecycleDemo`: `NEW`, `RUNNABLE`, `BLOCKED`, `TERMINATED`, `isAlive()`, `join()`&#10;- `CounterRaceDemo`: race condition without `synchronized`, then correct result with `synchronized`&#10;- `DeadlockDemo`: deadlock with opposite lock ordering, then fixed lock ordering&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
