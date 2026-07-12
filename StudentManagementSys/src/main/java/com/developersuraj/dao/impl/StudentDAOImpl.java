@@ -164,6 +164,44 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
+    public void deleteAllStudents() {
+
+        String deleteStudentUsers = """
+            DELETE FROM users
+            WHERE role = 'STUDENT';
+            """;
+
+        String deleteStudents = """
+            DELETE FROM students;
+            """;
+
+        try (
+                Connection connection = DBConnection.getConnection()
+        ) {
+
+            connection.setAutoCommit(false);
+
+            try (
+                    PreparedStatement ps1 = connection.prepareStatement(deleteStudentUsers);
+                    PreparedStatement ps2 = connection.prepareStatement(deleteStudents)
+            ) {
+
+                ps1.executeUpdate();
+                ps2.executeUpdate();
+
+                connection.commit();
+
+            } catch (SQLException e) {
+                connection.rollback();
+                throw e;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Unable to delete all students: " + e.getMessage(), e);
+        }
+    }
+
+    @Override
     public boolean exists(int studentId) {
 
         String sql = """

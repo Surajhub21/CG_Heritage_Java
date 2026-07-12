@@ -17,6 +17,8 @@ public interface StudentDAO {
 
     void deleteStudent(int id);
 
+    void deleteAllStudents();
+
     boolean exists(int id);
 
 }

@@ -31,7 +31,11 @@ public class AdminMenu {
             System.out.println("3. Search Student");
             System.out.println("4. Update Student");
             System.out.println("5. Delete Student");
-            System.out.println("6. Logout");
+            System.out.println("6. Delete All Student");
+            System.out.println("7. Export Students on CSV");
+            System.out.println("8. Import Students from CSV");
+            System.out.println("9. Backup Data");
+            System.out.println("10. Logout");
 
             System.out.print("Choice : ");
 
@@ -52,7 +56,15 @@ public class AdminMenu {
 
                     case 5 -> studentService.deleteStudent();
 
-                    case 6 -> {
+                    case 6 -> studentService.deleteAllStudent();
+
+                    case 7 -> studentService.exportStudents();
+
+                    case 8 -> studentService.importStudents("students.csv");
+
+                    case 9 -> studentService.backup();
+
+                    case 10 -> {
                         userService.logout();
                         return;
                     }

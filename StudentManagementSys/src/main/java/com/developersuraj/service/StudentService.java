@@ -6,6 +6,8 @@ import com.developersuraj.dao.StudentDAO;
 import com.developersuraj.exceptions.DuplicateIdException;
 import com.developersuraj.exceptions.StudentNotFoundException;
 import com.developersuraj.model.Student;
+import com.developersuraj.util.BackupUtil;
+import com.developersuraj.util.CSVUtil;
 import com.developersuraj.util.Validator;
 
 import java.util.List;
@@ -26,6 +28,7 @@ public class StudentService {
 
         System.out.print("Student ID : ");
         int id = scanner.nextInt();
+        scanner.nextLine();
 
         if (studentDAO.exists(id)) {
             throw new DuplicateIdException(id);
@@ -36,7 +39,7 @@ public class StudentService {
 
         System.out.print("Age : ");
         int age = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
+        scanner.nextLine();
 
         System.out.print("Course : ");
         String course = scanner.nextLine();
@@ -142,6 +145,26 @@ public class StudentService {
 
     }
 
+    public void deleteAllStudent() {
+
+        System.out.print("Are you sure? (Y/N) : ");
+
+        String choice = scanner.next();
+
+        if (choice.equalsIgnoreCase("Y")) {
+
+            studentDAO.deleteAllStudents();
+
+            System.out.println("All students deleted successfully.");
+
+        } else {
+
+            System.out.println("Operation cancelled.");
+
+        }
+
+    }
+
     public void viewMyProfile() {
 
         int studentId = util.Session.getCurrentUser().getStudentId();
@@ -157,5 +180,32 @@ public class StudentService {
         System.out.println("Name       : " + student.getName());
         System.out.println("Age        : " + student.getAge());
         System.out.println("Course     : " + student.getCourse());
+    }
+
+    public void exportStudents() {
+
+        List<Student> students = studentDAO.getAllStudents();
+
+        String filename = "students.csv";
+
+        CSVUtil.exportStudents(students, filename);
+    }
+
+    public void importStudents(String fileName) {
+
+        List<Student> students = CSVUtil.importStudents(fileName);
+
+        for (Student student : students) {
+            studentDAO.addStudent(student);
+        }
+
+        System.out.println("Import Completed.");
+    }
+
+    public void backup(){
+
+        List<Student> students = studentDAO.getAllStudents();
+
+        BackupUtil.backup(students);
     }
 }
